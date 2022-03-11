@@ -1,0 +1,126 @@
+body {
+	font-family: sans-serif;
+	margin: 0;
+	overflow: hidden;
+}
+
+#wheel-container {
+	height: 100vh;
+	width: 100vw;
+	
+	position: absolute;
+	left: 0;
+	top: 0;
+	
+	margin-top: 32px;
+}
+
+#wheel-container, #wheel, #win-container, #win {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#wheel {
+	--wheel-size: 50vmin;
+	
+	user-select: none;
+	
+	transform: rotate(45deg);
+	width: var(--wheel-size);
+	height: var(--wheel-size);
+	border: solid 2px black;
+	padding: 0;
+	
+	background: white;
+	
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+#wheel-container:not(.spinning) > #wheel {
+	cursor: pointer;
+}
+#wheel-container:not(.spinning) > #wheel:focus {
+	transform: rotate(45deg) scale(1.05);
+}
+#wheel-container.spinning > #wheel {
+	outline: none;
+}
+
+#e {
+	transform: rotate(-45deg);
+	font-size: max(calc(var(--wheel-size) - 24pt), 12pt);
+}
+
+/* will be removed by javascript */
+#espin-jsonly {
+	display: none;
+}
+
+/* Speen */
+@keyframes espin {
+	from {
+		transform: rotate(0turn);
+	}
+	
+	to {
+		transform: rotate(var(--rotations));
+	}
+}
+.spinning {
+	animation-name: espin;
+	animation-duration: var(--time);
+	animation-timing-function: cubic-bezier(0, 1, 0, 1.015);
+}
+
+.klik-to-spin {
+	font-size: 64pt;
+	text-align: center;
+		
+	position: absolute;
+	top: 0;
+	width: 100vw;
+}
+
+.jackpot {
+	font-size: 16pt;
+	
+	position: absolute;
+	left: 20px;
+	bottom: 16px;
+}
+.disclaimer {
+	font-size: 7pt;
+	
+	position: absolute;
+	right: 2px;
+	bottom: 2px;
+}
+
+#win-container {
+	width: 100vw;
+	height: 100vh;
+	
+	z-index: 100;
+	position: relative;
+}
+
+#win {
+	box-sizing: border-box;
+	width: calc(100vw - 120px);
+	height: calc(100vh - 120px);
+	
+	margin: 60px;
+	padding: 20px;
+	background: white;
+	border: solid 5px lime;
+	
+	font-size: 20pt;
+	
+	text-align: center;
+}
+
+#win-container.hidden {
+	display: none;
+}
